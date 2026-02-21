@@ -3,7 +3,9 @@
 @section('title', $article->title)
 
 @section('content')
-<div class="glass-card p-4">
+<div class="row">
+    <div class="col-12">
+        <div class="glass-card p-4">
     <h1 class="mb-3">{{ $article->title }}</h1>
     <div class="article-meta text-center">
         <span class="text-white-50">By:</span> 
@@ -17,31 +19,7 @@
     </div>
     <div class="content mb-4" style="line-height: 1.8; white-space: pre-wrap; font-size: 1.1em; color: #f0f0f0;">{{ $article->content }}</div>
 
-    <div class="purchase-section p-3 border-top border-secondary mt-4 d-flex justify-content-between align-items-center bg-dark bg-opacity-25 rounded">
-        <div class="price-info">
-            <span class="text-white-50">Price:</span>
-            <span class="h3 text-success mb-0 ms-2">{{ number_format($article->price, 2) }} $</span>
-            <div class="stock-info mt-1">
-                @if($article->stock > 0)
-                    <span class="text-success small"><i class="bi bi-check-circle"></i> In Stock ({{ $article->stock }})</span>
-                @else
-                    <span class="text-danger small"><i class="bi bi-x-circle"></i> Out of Stock</span>
-                @endif
-            </div>
-        </div>
-        <div class="action-buttons">
-            @auth
-                <button class="btn btn-lg btn-success add-to-cart @if($article->stock <= 0) disabled @endif" 
-                        data-id="{{ $article->id }}" 
-                        data-title="{{ $article->title }}"
-                        @if($article->stock <= 0) disabled @endif>
-                    <i class="bi bi-cart-plus"></i> Add to Cart
-                </button>
-            @else
-                <a href="{{ route('login') }}" class="btn btn-lg btn-info">Login to Purchase</a>
-            @endauth
-        </div>
-    </div>
+    <div class="mt-4"></div>
 
     @auth
         @if(Auth::user()->username == $article->author || Auth::user()->isAdmin())
@@ -55,10 +33,14 @@
             </div>
         @endif
     @endauth
+        </div>
+    </div>
 </div>
 
 <!-- Comments Section -->
-<div class="glass-card p-4">
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="glass-card p-4">
     <h3 class="mb-4 border-bottom border-secondary pb-2 d-inline-block">Comments</h3>
 
     @auth
@@ -92,6 +74,8 @@
                 @include('partials.comment', ['comment' => $comment, 'grouped_comments' => $grouped_comments, 'article' => $article])
             @endforeach
         @endif
+    </div>
+        </div>
     </div>
 </div>
 

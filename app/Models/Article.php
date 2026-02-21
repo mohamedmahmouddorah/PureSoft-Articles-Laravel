@@ -15,6 +15,7 @@ class Article extends Model
         'author',
         'price',
         'stock',
+        'image_path',
     ];
 
     /**

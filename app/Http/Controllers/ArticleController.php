@@ -27,8 +27,7 @@ class ArticleController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'price' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0',
+            'image_path' => 'nullable|string|max:255',
         ]);
 
         $article = Auth::user()->articles()->create($validated);
@@ -59,8 +58,7 @@ class ArticleController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'price' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0',
+            'image_path' => 'nullable|string|max:255',
         ]);
 
         $article->update($validated);

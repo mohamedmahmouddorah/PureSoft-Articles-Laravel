@@ -8,7 +8,7 @@
 <div class="row">
     @if($articles->count() > 0)
         @foreach($articles as $article)
-            <div class="col-md-12">
+            <div class="col-12">
                 <div class="glass-card article-card p-4 mb-4">
                     <h2 class="h3 mb-3">
                         <a href="{{ route('articles.show', $article) }}" class="text-info text-decoration-none">
@@ -24,24 +24,9 @@
                     <p class="excerpt" style="color: #eee; line-height: 1.6;">
                         {{ Str::limit($article->content, 150) }}
                     </p>
-                    <div class="d-flex justify-content-between align-items-center">
-                         <div class="price-tag h4 text-success mb-0">
-                             {{ number_format($article->price, 2) }} $
-                             @if($article->stock <= 0)
-                                 <span class="badge bg-danger ms-2" style="font-size: 0.6rem;">Out of Stock</span>
-                             @endif
-                         </div>
-                         <div class="actions">
-                             <a href="{{ route('articles.show', $article) }}" class="btn btn-sm btn-outline-info">Read More <i class="bi bi-arrow-right"></i></a>
-                             @auth
-                                 <button class="btn btn-sm btn-success add-to-cart @if($article->stock <= 0) disabled @endif" 
-                                         data-id="{{ $article->id }}" 
-                                         data-title="{{ $article->title }}"
-                                         @if($article->stock <= 0) disabled @endif>
-                                     <i class="bi bi-cart-plus"></i> Add
-                                 </button>
-                             @endauth
-                         </div>
+                    
+                    <div class="text-end mb-3">
+                        <a href="{{ route('articles.show', $article) }}" class="btn btn-sm btn-outline-info">Read More <i class="bi bi-arrow-right"></i></a>
                     </div>
 
                     @auth
@@ -82,9 +67,7 @@
                                 <div class="text-center text-muted small">No comments yet.</div>
                             @endif
                         </div>
-                    @endauth
-                    
-                    @auth
+
                         @if(Auth::user()->username == $article->author || Auth::user()->isAdmin())
                             <div class="mt-3 pt-3 border-top border-secondary d-flex gap-2">
                                 <a href="{{ route('articles.edit', $article) }}" class="btn btn-warning btn-sm">✏️ Edit</a>

@@ -26,13 +26,8 @@
             <div class="mb-3">
                 <textarea name="content" class="form-control" rows="6" required placeholder="Article Content...">{{ old('content', $article->content) }}</textarea>
             </div>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <input type="number" step="0.01" class="form-control" name="price" value="{{ old('price', $article->price) }}" required placeholder="Price ($)">
-                </div>
-                <div class="col-md-6 mb-3">
-                    <input type="number" class="form-control" name="stock" value="{{ old('stock', $article->stock) }}" required placeholder="Stock">
-                </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" name="image_path" value="{{ old('image_path', $article->image_path) }}" placeholder="Image URL (optional)">
             </div>
             <button type="submit" class="btn btn-warning w-100">Save Changes</button>
             <a href="{{ route('articles.index') }}" class="btn btn-secondary w-100 mt-2">Cancel</a>

@@ -6,8 +6,6 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 // Public Routes
@@ -37,11 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
-    // Cart & Checkout
-    Route::get('/cart-data', [CartController::class, 'getCart'])->name('cart.data');
-    Route::post('/cart/add/{article}', [CartController::class, 'add'])->name('cart.add');
-    Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
-    Route::post('/checkout', [OrderController::class, 'store'])->name('checkout.store');
+    // Article Actions (Except public index/show)
 
     // Users List (Protected)
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
